@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ditya Lights & Decore - Bill Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Shop Header -->
+    <header>
+      <h1 class="shop-title">Ditya Lights & Decore</h1>
+      <p class="subtitle">Customer Bill Generator</p>
+    </header>
+
+    <!-- Customer Information -->
+    <section class="section-box">
+      <h2>Customer Information</h2>
+      <div class="customer-info">
+        <label>
+          Customer Name:
+          <input type="text" id="customerName" placeholder="Enter customer name">
+        </label>
+        <label>
+          Phone Number:
+          <input type="text" id="customerPhone" placeholder="Enter phone number">
+        </label>
+      </div>
+    </section>
+
+    <!-- Item Entry Section -->
+    <div class="item-entry">
+  <label>
+    Item Name:
+    <input type="text" id="itemName" placeholder="Enter item name">
+  </label>
+  <label>
+    Quantity:
+    <input type="number" id="quantity" placeholder="0">
+  </label>
+  <label>
+    Price:
+    <input type="number" id="price" placeholder="₹0">
+  </label>
+
+  <div class="discount-row">
+    <label>
+      <input type="checkbox" id="enableDiscount" onchange="toggleDiscountInput()"> Enable Discount
+    </label>
+    <label id="discountLabel" style="display: none;">
+      Discount (%):
+      <input type="number" id="discount" placeholder="0%">
+    </label>
+  </div>
+
+  <div class="button-group">
+    <button class="btn add" onclick="addItem()">➕ Add Item</button>
+    <button class="btn pdf" onclick="generatePDF()">⬇️ Download PDF</button>
+  </div>
+</div>
+
+
+    <!-- Bill Display Section -->
+    <section id="billSection">
+      <div class="bill-header">
+        <h2>Ditya Lights & Decore</h2>
+        <p>Front OF : State Bank OF India, Main 
+           Road Rehti,MP</p>
+        <p>Phone: +91-8770737556</p>
+        <hr />
+      </div>
+
+      <div class="bill-meta">
+        <p><strong>Customer Name:</strong> <span id="displayCustomer"></span></p>
+        <p><strong>Date:</strong> <span id="billDate"></span></p>
+      </div>
+
+      <table id="billTable">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Price (₹)</th>
+            <th>Discount (%)</th>
+            <th>Total (₹)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <h3 id="grandTotal">Grand Total: ₹0</h3>
+      <p class="thanks">✨ Thank you for shopping with Ditya Lights & Decore! ✨</p>
+    </section>
+  </div>
+
+  <script src="bill.js"></script>
+  <script>
+    function toggleDiscountInput() {
+      const isChecked = document.getElementById('enableDiscount').checked;
+      document.getElementById('discountLabel').style.display = isChecked ? 'inline-block' : 'none';
+      if (!isChecked) {
+        document.getElementById('discount').value = '';
+      }
+    }
+  </script>
+</body>
+</html>
