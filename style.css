@@ -169,117 +169,50 @@ input[type="number"] {
   margin: 0;
   font-weight: normal;
 }
-/* Responsive Container */
-.container {
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 20px;
-}
-
-/* Labels with inputs stacked */
-.customer-info label,
-.item-entry label {
-  display: block;
-  margin-bottom: 15px;
-}
-
-/* Input fields full-width */
-input[type="text"],
-input[type="number"] {
+/* Table wrapper scroll for mobile */
+.table-wrapper {
+  overflow-x: auto;
   width: 100%;
-  box-sizing: border-box;
 }
 
-/* Responsive Discount Row */
-.discount-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.discount-row label {
-  flex: 1 1 45%;
-}
-
-/* Responsive Table */
+/* Fix table inside PDF view */
 #billTable {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
-  overflow-x: auto;
-  display: block;
-}
-
-#billTable thead {
-  background-color: #007bff;
-  color: white;
+  min-width: 600px; /* Ensures PDF doesn't squeeze */
 }
 
 #billTable th,
 #billTable td {
-  padding: 8px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   white-space: nowrap;
 }
 
-/* Button group spacing */
-.button-group {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+#billTable th {
+  background-color: #007bff;
+  color: white;
+  height: 35px;
 }
 
-/* Button styles */
-.btn {
-  padding: 12px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-/* Responsive Typography */
-.shop-title {
-  font-size: 1.8rem;
-  text-align: center;
-}
-
-.subtitle {
-  font-size: 1rem;
-  text-align: center;
-}
-
-/* Media Query for larger screens */
-@media (min-width: 600px) {
-  .customer-info,
-  .item-entry {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+/* PDF-specific tweak */
+@media print {
+  .container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
-  .customer-info label,
-  .item-entry label {
-    flex: 1 1 30%;
+  #billTable {
+    font-size: 12px;
   }
 
-  .button-group {
-    flex-direction: row;
-    justify-content: flex-start;
-    width: fit-content;
-  }
-
-  .btn {
-    width: auto;
-  }
-
-  .discount-row {
-    flex-direction: row;
-    align-items: center;
+  .btn,
+  .input-section,
+  .section-box {
+    display: none; /* hide UI controls in PDF */
   }
 }
 
