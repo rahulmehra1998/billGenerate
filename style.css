@@ -119,9 +119,9 @@ input[type="number"] {
 }
 
 #billTable th {
-  background-color: #007bff;
-  color: white;
-  height: 35px; /* 👈 Reduced table header height */
+      background-color: #93797c;
+    color: white;
+    height: 15px;
 }
 
 #grandTotal {
@@ -191,12 +191,6 @@ input[type="number"] {
   white-space: nowrap;
 }
 
-#billTable th {
-  background-color: #007bff;
-  color: white;
-  height: 35px;
-}
-
 /* PDF-specific tweak */
 @media print {
   .container {
@@ -215,5 +209,128 @@ input[type="number"] {
     display: none; /* hide UI controls in PDF */
   }
 }
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
 
+.delete-btn:hover {
+  background-color: #c82333;
+}
+.discount-edit {
+  width: 60px;
+  padding: 4px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+/* Hide the "Action" column when printing or exporting to PDF */
+@media print {
+  th.action-col,
+  td.action-col {
+    display: none !important;
+  }
+}
+   body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    header, h2, .bill-header h2 {
+      text-align: center;
+    }
+
+    .section-box {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fdfdfd;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+
+    .discount-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .button-group {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 10px 15px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .discount-edit {
+      width: 60px;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .thanks {
+      text-align: center;
+      margin-top: 20px;
+      font-style: italic;
+      color: green;
+    }
 /* Already existing classes should remain from previous instructions */
