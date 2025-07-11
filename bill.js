@@ -12,28 +12,32 @@ function addItem() {
     return;
   }
 
-  // Calculate total after discount
   const discountedPrice = price - (price * discountPercent / 100);
   const total = discountedPrice * quantity;
 
-  // Add row to bill table
-  const table = document.getElementById('billTable').getElementsByTagName('tbody')[0];
-  const row = table.insertRow();
-  row.innerHTML = `
-    <td>${itemName}</td>
-    <td>${quantity}</td>
-    <td>₹${price.toFixed(2)}</td>
-    <td>${discountPercent}%</td>
-    <td>₹${total.toFixed(2)}</td>
-  `;
+  const tableBody = document.getElementById('billTable').getElementsByTagName('tbody')[0];
+  const row = tableBody.insertRow();
 
-  // Update customer name and date
+  row.innerHTML = `
+  <td>${itemName}</td>
+  <td>${quantity}</td>
+  <td>₹${price.toFixed(2)}</td>
+  <td>
+    <input type="number" value="${discountPercent}" class="discount-edit" min="0" max="100"
+      onchange="recalculateRow(this)">
+  </td>
+  <td class="row-total">₹${total.toFixed(2)}</td>
+  <td class="action-col"><button class="delete-btn" onclick="deleteRow(this)">🗑️</button></td>
+`;
+
+
   document.getElementById('displayCustomer').innerText = `${customerName} (${customerPhone})`;
   document.getElementById('billDate').innerText = new Date().toLocaleDateString();
 
   updateGrandTotal();
   clearItemInputs();
 }
+
 
 function updateGrandTotal() {
   const table = document.getElementById('billTable').getElementsByTagName('tbody')[0];
@@ -58,3 +62,23 @@ function generatePDF() {
     const customerName = document.getElementById('customerName').value;
     html2pdf().from(element).save(`${customerName}_Bill.pdf`);
 }
+function deleteRow(button) {
+  const row = button.closest("tr");
+  row.remove();
+  updateGrandTotal();
+}
+function recalculateRow(input) {
+  const row = input.closest("tr");
+  const qty = parseFloat(row.cells[1].innerText);
+  const priceText = row.cells[2].innerText.replace('₹', '');
+  const price = parseFloat(priceText);
+  const discount = parseFloat(input.value) || 0;
+
+  const discountedPrice = price - (price * discount / 100);
+  const total = discountedPrice * qty;
+
+  row.querySelector(".row-total").innerText = `₹${total.toFixed(2)}`;
+
+  updateGrandTotal();
+}
+
